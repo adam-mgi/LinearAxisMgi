@@ -1,7 +1,7 @@
 {
     "name": "LinearAxisMgi",
     "version": "1.0.0",
-    "description": "An Arduino library for interacting with a linear ball screw stepper axis.",
+    "description": "Helper functions for interacting with a linear ball screw stepper axis.",
     "repository":
     {
         "type": "git",
