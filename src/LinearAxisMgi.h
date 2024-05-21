@@ -7,3 +7,4 @@
 //void Home();
 float StepsToMm(long steps, int pitch, int steps_per_rev);
 long MmToSteps(float dist_mm, int pitch, int steps_per_rev);
+void HomeAxis(AccelStepper &motor, int home_sensor_pin=2, int speed_percent=100, bool motor_dir_inv = true, long move_dist_steps);
