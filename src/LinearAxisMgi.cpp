@@ -12,7 +12,7 @@ long MmToSteps(float dist_mm, int pitch, int steps_per_rev)
   return steps;
 }
 
-void HomeAxis(AccelStepper &motor, int home_sensor_pin=2, int speed_percent=100, bool motor_dir_inv = true, long move_dist_steps)
+void HomeAxis(AccelStepper &motor, int home_sensor_pin, int speed_percent, bool motor_dir_inv, long move_dist_steps)
 {
     long curr_motor_max_speed = motor.maxSpeed();
     long curr_motor_accel = motor.acceleration();
