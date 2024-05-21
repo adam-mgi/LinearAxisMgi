@@ -1,0 +1,25 @@
+{
+    "name": "LinearAxisMgi",
+    "version": "1.0.0",
+    "description": "An Arduino library for interacting with a linear ball screw stepper axis.",
+    "repository":
+    {
+        "type": "git",
+        "url": "https://github.com/adam-mgi/LinearAxisMgi.git"
+    },
+    "authors":
+    [
+      {
+        "name": "Adam Retberg"
+      }
+    ],
+    "frameworks": "Arduino",
+    "platforms": "*",
+    "dependencies":
+    [
+      {
+        "name": "AccelStepper",
+        "version": "^1.64"
+      }
+    ]
+  }
