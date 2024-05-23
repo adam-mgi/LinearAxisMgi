@@ -14,14 +14,14 @@ long MmToSteps(float dist_mm, int pitch, int steps_per_rev)
 
 void HomeAxis(AccelStepper &motor, int home_sensor_pin, int speed_percent, bool motor_dir_inv, long move_dist_steps)
 {
-    long curr_motor_max_speed = motor.maxSpeed();
-    long curr_motor_accel = motor.acceleration();
+    float curr_motor_max_speed = motor.maxSpeed();
+    float curr_motor_accel = motor.acceleration();
 
     // if the home speed percentage is not 100, set the home speed and acceleration
     if (speed_percent != 100)
     {
-        motor.setMaxSpeed(curr_motor_max_speed * (speed_percent / 100));
-        motor.setAcceleration(curr_motor_accel * (speed_percent / 100));
+        motor.setMaxSpeed(curr_motor_max_speed * (float(speed_percent) / 100.0));
+        motor.setAcceleration(curr_motor_accel * (float(speed_percent) / 100.0));
     }
 
     // set the direction for the motor to move
