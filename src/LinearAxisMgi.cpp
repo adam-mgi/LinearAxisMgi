@@ -26,20 +26,21 @@ void HomeAxis(AccelStepper &motor, int home_sensor_pin, int speed_percent, bool 
 
     // set the direction for the motor to move
     // this is used in the move command
+    int motor_dir = 0;
     if (motor_dir_inv)
     {
-        int motor_dir = -1;
+        motor_dir = -1;
     }
     else
     {
-        int motor_dir = 1;
+        motor_dir = 1;
     }
 
     //read the home sensor
     bool home_sensor_state = digitalRead(home_sensor_pin);
     
     //set the move distance and run the motor until it reaches the home switch
-    motor.move(move_dist_steps);
+    motor.move(move_dist_steps * motor_dir);
     while (!home_sensor_state)
     {
         motor.run();
