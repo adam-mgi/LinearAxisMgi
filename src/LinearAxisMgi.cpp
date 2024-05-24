@@ -54,3 +54,9 @@ void HomeAxis(AccelStepper &motor, int home_sensor_pin, int speed_percent, bool 
     motor.setMaxSpeed(curr_motor_max_speed);
     motor.setAcceleration(curr_motor_accel);
 }
+
+void PercentSpeedAccelChange(AccelStepper &motor, int speed_percent)
+{
+    motor.setMaxSpeed(motor.maxSpeed() * (float(speed_percent) / 100.0));
+    motor.setAcceleration(motor.acceleration() * (float(speed_percent) / 100.0));
+}
