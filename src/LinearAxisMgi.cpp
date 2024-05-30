@@ -41,7 +41,7 @@ bool HomeAxis(AccelStepper &motor, int home_sensor_pin, int speed_percent, bool 
     
     //set the move distance and run the motor until it reaches the home switch
     motor.move(move_dist_steps * motor_dir);
-    while (!home_sensor_state || motor.distanceToGo() !=0)
+    while (!home_sensor_state && motor.distanceToGo() !=0)
     {
         motor.run();
         home_sensor_state = digitalRead(home_sensor_pin);
