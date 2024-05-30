@@ -46,7 +46,7 @@ bool HomeAxis(AccelStepper &motor, int home_sensor_pin, int speed_percent, bool 
         motor.run();
         home_sensor_state = digitalRead(home_sensor_pin);
     }
-
+    long dist_to_go = motor.distanceToGo();
     motor.setCurrentPosition(0);
     motor.move(0);
 
@@ -57,7 +57,7 @@ bool HomeAxis(AccelStepper &motor, int home_sensor_pin, int speed_percent, bool 
     // if the motor stopped running because distance to go equals 0
     // then assume the limit switch is faulty and return false
     // otherwise return true indicating a successful home
-    if (motor.distanceToGo() == 0)
+    if (dist_to_go == 0)
     {
         return false;
     }
