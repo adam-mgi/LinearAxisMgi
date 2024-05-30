@@ -12,7 +12,7 @@ long MmToSteps(float dist_mm, int pitch, int steps_per_rev)
   return steps;
 }
 
-void HomeAxis(AccelStepper &motor, int home_sensor_pin, int speed_percent, bool motor_dir_inv, long move_dist_steps)
+bool HomeAxis(AccelStepper &motor, int home_sensor_pin, int speed_percent, bool motor_dir_inv, long move_dist_steps)
 {
     float curr_motor_max_speed = motor.maxSpeed();
     float curr_motor_accel = motor.acceleration();
@@ -41,7 +41,7 @@ void HomeAxis(AccelStepper &motor, int home_sensor_pin, int speed_percent, bool 
     
     //set the move distance and run the motor until it reaches the home switch
     motor.move(move_dist_steps * motor_dir);
-    while (!home_sensor_state)
+    while (!home_sensor_state || motor.distanceToGo() !=0)
     {
         motor.run();
         home_sensor_state = digitalRead(home_sensor_pin);
@@ -53,6 +53,18 @@ void HomeAxis(AccelStepper &motor, int home_sensor_pin, int speed_percent, bool 
     //set the speed and acceleration back to their original values
     motor.setMaxSpeed(curr_motor_max_speed);
     motor.setAcceleration(curr_motor_accel);
+
+    // if the motor stopped running because distance to go equals 0
+    // then assume the limit switch is faulty and return false
+    // otherwise return true indicating a successful home
+    if (motor.distanceToGo() == 0)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 void PercentSpeedAccelChange(AccelStepper &motor, int speed_percent)
